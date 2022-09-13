@@ -1,3 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+
+
 typedef struct student {
   char* lastname;
   char* firstname;
@@ -9,7 +16,10 @@ typedef struct student {
 } Student;
 
 
-
+typedef struct slist {
+  Student* head;
+  Student* tail;
+} sList;
 
 
 //The last name of the student stored in a char*
