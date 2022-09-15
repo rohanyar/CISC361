@@ -60,7 +60,8 @@ void deleteStudent() {
 void printBE() {
     curr = head;
     while(curr != NULL) {
-        printf("node");
+        printf("Last name:%s / First name:%s / Id:%ld / Year:%s / Graduation:%i \n",
+        student->lastname, student->firstname, student->id, student->year, student->graduation);
         curr = curr->next;
     }
 }
