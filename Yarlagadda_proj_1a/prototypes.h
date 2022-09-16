@@ -16,10 +16,11 @@ typedef struct student {
 } Student;
 
 
-typedef struct slist {
-  Student* head;
-  Student* tail;
-} sList;
+void addStudent(char* lastname, char* firstname, long studentid, char* yearofstudent, int gradyear);
+void deleteStudent(char* lastname);
+void printBE();
+void printEB();
+void exit();
 
 
 //The last name of the student stored in a char*

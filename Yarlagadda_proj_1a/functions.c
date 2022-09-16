@@ -99,11 +99,50 @@ int main()
 void addStudent(char* lastname, char* firstname, long id, char* year, int graduation)
 {
     Student *student = (Student *)malloc(sizeof(Student));
+    student->lastname = lastname;
+    student->firstname = firstname;
+    student->id = id;
+    student->year = year;
+    student->graduation = graduation;
+    student->next = NULL;
+    if(head == NULL) {
+        student->prev = NULL;
+        head = student;
+    }
+    else {
+        tail->next = student;
+        student->prev = tail;
+    }
+    tail = student;
+    free(student);
 }
 
 void deleteStudent(char* lastname)
 {
-    ;
+    if(head == NULL && tail == NULL) {
+        printf("Nothing to delete");
+        return;
+    }
+    Student* curr = head;
+    while(curr != NULL) {
+        curr = curr->next;
+        if(strcmp(curr->lastname, lastname) == 0) {
+            if(curr == head) {
+                curr->next->prev = NULL;
+                head = curr->next;
+            }
+            else if(curr == tail) {
+                curr->prev->next = NULL;
+                tail = curr->prev;
+            }
+            else {
+                curr->prev->next = curr->next;
+                curr->next->prev = curr->prev;
+            }
+            free(curr);
+            break;
+        }
+    }
 }
 
 void printBE()
