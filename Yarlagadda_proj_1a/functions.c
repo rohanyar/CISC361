@@ -224,6 +224,9 @@ void exits()
     {
         curr = head;
         head = head->next;
+        free(curr->lastname);
+        free(curr->firstname);
+        free(curr->year);
         free(curr);
     }
 }
