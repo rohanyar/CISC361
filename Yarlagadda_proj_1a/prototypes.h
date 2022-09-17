@@ -4,15 +4,15 @@
 
 
 
-
+//check struct line 16
 typedef struct student {
   char* lastname;
   char* firstname;
   long id;
   char* year;
   int graduation;
-  Student* next;
-  Student* prev;
+  struct student* next;
+  struct student* prev;
 } Student;
 
 
@@ -20,7 +20,7 @@ void addStudent(char* lastname, char* firstname, long studentid, char* yearofstu
 void deleteStudent(char* lastname);
 void printBE();
 void printEB();
-void exit();
+void exits();
 
 
 //The last name of the student stored in a char*

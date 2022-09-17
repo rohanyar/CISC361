@@ -10,93 +10,110 @@ Student *tail = NULL;
 int main()
 {
     char str[MAX];
-    int len;
-    printf("1: Add Student\n 2: Delete Student\n 3: Print Beginning to End\n 4: Print End to Beginning\n 5: Exit\n");
-    int decision;
-    if (decision == 1)
+    char lastname[MAX];
+    char firstname[MAX];
+    char year[MAX];
+    printf("\n 1: Add Student\n 2: Delete Student\n 3: Print Beginning to End\n 4: Print End to Beginning\n 5: Exit\n");
+    int decision = 0;
+    if (fgets(str, MAX, stdin) != NULL)
     {
-        Student *student = (Student *)malloc(sizeof(Student)); 
-        printf("Student last name: ");
-        if (fgets(str, MAX, stdin) != NULL)
-        {
-            len = (int)strlen(str);
-            str[len - 1] = '\0';
-            student->lastname = (char *)malloc(len);
-            strcopy(student->lastname, str);
-        }
-        printf("Student first name: ");
-        if (fgets(str, MAX, stdin) != NULL)
-        {
-            len = (int)strlen(str);
-            str[len - 1] = '\0';
-            student->firstname = (char *)malloc(len);
-            strcopy(student->firstname, str);
-        }
-        printf("Student id: ");
-        if (fgets(str, MAX, stdin) != NULL)
-        {
-            len = (int)strlen(str);
-            str[len - 1] = '\0';
-            student->id = (char *)malloc(len);
-            strcopy(student->id, str);
-        }
-        printf("Student year: ");
-        if (fgets(str, MAX, stdin) != NULL)
-        {
-            len = (int)strlen(str);
-            str[len - 1] = '\0';
-            student->year = (char *)malloc(len);
-            strcopy(student->year, str);
-        }
-        printf("Student graduation: ");
-        if (fgets(str, MAX, stdin) != NULL)
-        {
-            len = (int)strlen(str);
-            str[len - 1] = '\0';
-            student->graduation = (char *)malloc(len);
-            strcopy(student->graduation, str);
-        }
-        addStudent(student->lastname, student->firstname, student->id, student->year, student->graduation);
-        free(student->lastname);
-        free(student->firstname);
-        free(student->id);
-        free(student->year);
-        free(student->graduation);
-        free(student);
+        decision = atol(str);
     }
-    else if (decision == 2)
+
+    while (decision != 5)
     {
-        Student *student = (Student *)malloc(sizeof(Student)); 
-        printf("Enter last name of student to delete: \n");
-        if (fgets(str, MAX, stdin) != NULL)
+        if (decision == 1)
         {
-            len = (int)strlen(str);
-            str[len - 1] = '\0';
-            student->lastname = (char *)malloc(len);
-            strcopy(student->lastname, str);
+            Student *student = (Student *)malloc(sizeof(Student));
+            printf("Student last name: ");
+            if (fgets(lastname, MAX, stdin) != NULL)
+            {
+                lastname[strlen(lastname) - 1] = '\0';
+            }
+            printf("Student first name: ");
+            if (fgets(firstname, MAX, stdin) != NULL)
+            {
+                firstname[strlen(firstname) - 1] = '\0';
+            }
+            printf("Student id: ");
+            if (fgets(str, MAX, stdin) != NULL)
+            {
+                student->id = (long)atol(str);
+            }
+            printf("Student year: ");
+            if (fgets(year, MAX, stdin) != NULL)
+            {
+                year[strlen(year) - 1] = '\0';
+            }
+            printf("Student graduation: ");
+            if (fgets(str, MAX, stdin) != NULL)
+            {
+                student->graduation = atoi(str);
+            }
+            addStudent(lastname, firstname, student->id, year, student->graduation);
+            printf(" 1: Add Student\n 2: Delete Student\n 3: Print Beginning to End\n 4: Print End to Beginning\n 5: Exit\n");
+            if (fgets(str, MAX, stdin) != NULL)
+            {
+                decision = atol(str);
+            }
+
+            /*
+            free(student->lastname);
+            free(student->firstname);
+            free(student->id);
+            free(student->year);
+            free(student->graduation);
+            free(student);
+            */
         }
-        deleteStudent(student->lastname);
-        free(student->lastname);
-        free(student);
-    }
-    else if (decision == 3)
-    {
-        printf("Printing list from beginning to end\n");
-        printBE();
-    }
-    else if (decision == 4)
-    {
-        printf("Printing list from end to beginning\n");
-        printEB();
-    }
-    else if (decision == 5)
-    {
-        printf("Freeing all dynamically allocated memory\n");
-        exit();
+        else if (decision == 2)
+        {
+            printf("Enter last name of student to delete: \n");
+            if (fgets(str, MAX, stdin) != NULL)
+            {
+                str[strlen(str) - 1] = '\0';
+            }
+            deleteStudent(str);
+            printf(" 1: Add Student\n 2: Delete Student\n 3: Print Beginning to End\n 4: Print End to Beginning\n 5: Exit\n");
+            if (fgets(str, MAX, stdin) != NULL)
+            {
+                decision = atol(str);
+            }
+        }
+        else if (decision == 3)
+        {
+            printf("Printing list from beginning to end\n");
+            printBE();
+            printf(" 1: Add Student\n 2: Delete Student\n 3: Print Beginning to End\n 4: Print End to Beginning\n 5: Exit\n");
+            if (fgets(str, MAX, stdin) != NULL)
+            {
+                decision = atol(str);
+            }
+        }
+        else if (decision == 4)
+        {
+            printf("Printing list from end to beginning\n");
+            printEB();
+            printf(" 1: Add Student\n 2: Delete Student\n 3: Print Beginning to End\n 4: Print End to Beginning\n 5: Exit\n");
+            if (fgets(str, MAX, stdin) != NULL)
+            {
+                decision = atol(str);
+            }
+        }
+        else if (decision == 5)
+        {
+            printf("Freeing all dynamically allocated memory\n");
+            exits();
+            printf(" 1: Add Student\n 2: Delete Student\n 3: Print Beginning to End\n 4: Print End to Beginning\n 5: Exit\n");
+            if (fgets(str, MAX, stdin) != NULL)
+            {
+                decision = atol(str);
+            }
+        }
     }
 }
 
-void addStudent(char* lastname, char* firstname, long id, char* year, int graduation)
+void addStudent(char *lastname, char *firstname, long id, char *year, int graduation)
 {
     Student *student = (Student *)malloc(sizeof(Student));
     student->lastname = lastname;
@@ -105,40 +122,50 @@ void addStudent(char* lastname, char* firstname, long id, char* year, int gradua
     student->year = year;
     student->graduation = graduation;
     student->next = NULL;
-    if(head == NULL) {
+    if (head == NULL)
+    {
         student->prev = NULL;
         head = student;
     }
-    else {
+    else
+    {
         tail->next = student;
         student->prev = tail;
     }
     tail = student;
-    free(student);
 }
 
-void deleteStudent(char* lastname)
+void deleteStudent(char *lastname)
 {
-    if(head == NULL && tail == NULL) {
-        printf("Nothing to delete");
+    if (head == NULL && tail == NULL)
+    {
+        printf("Nothing to delete\n");
         return;
     }
-    Student* curr = head;
-    while(curr != NULL) {
+    Student *curr = head;
+    while (curr != NULL)
+    {
         curr = curr->next;
-        if(strcmp(curr->lastname, lastname) == 0) {
-            if(curr == head) {
+        if (strcmp(curr->lastname, lastname) == 0)
+        {
+            if (curr == head)
+            {
                 curr->next->prev = NULL;
                 head = curr->next;
             }
-            else if(curr == tail) {
+            else if (curr == tail)
+            {
                 curr->prev->next = NULL;
                 tail = curr->prev;
             }
-            else {
+            else
+            {
                 curr->prev->next = curr->next;
                 curr->next->prev = curr->prev;
             }
+            free(curr->lastname);
+            free(curr->firstname);
+            free(curr->year);
             free(curr);
             break;
         }
@@ -167,7 +194,7 @@ void printEB()
     }
 }
 
-void exit()
+void exits()
 {
     Student *curr;
     while (head != NULL)
@@ -177,11 +204,3 @@ void exit()
         free(curr);
     }
 }
-
-/*
-  char* lastname;
-  char* firstname;
-  long id;
-  char* year;
-  int graduation;
-*/
