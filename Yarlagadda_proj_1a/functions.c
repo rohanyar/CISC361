@@ -21,7 +21,7 @@ int main()
         decision = atol(str);
     }
 
-    while (decision != 5)
+    while (decision)
     {
         if (decision == 1)
         {
@@ -124,6 +124,7 @@ int main()
             {
                 decision = atol(str);
             }
+            break;
         }
     }
 }
@@ -160,17 +161,22 @@ void deleteStudent(char *lastname)
     Student *curr = head;
     while (curr != NULL)
     {
-        curr = curr->next;
+        
         if (strcmp(curr->lastname, lastname) == 0)
         {
             if (curr == head)
             {
-                curr->next->prev = NULL;
+                if(curr != tail){
+                    curr->next->prev = NULL;
+                }
                 head = curr->next;
+
             }
             else if (curr == tail)
             {
-                curr->prev->next = NULL;
+                if(curr != head){
+                    curr->prev->next = NULL;
+                }
                 tail = curr->prev;
             }
             else
@@ -184,8 +190,10 @@ void deleteStudent(char *lastname)
             free(curr);
             break;
         }
+        curr = curr->next;
     }
 }
+
 
 void printBE()
 {
